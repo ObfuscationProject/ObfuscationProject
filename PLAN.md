@@ -17,21 +17,44 @@ ObfuscationOS `docs/plans/README.md`; nothing here closes a gate.
 - `manifest.json` pins the component commits that were validated together;
   `python3 scripts/sync.py --pin` after each promotion.
 
-## P0: baseline (done 2026-10-24)
+## P0: baseline (done 2026-10-24, audited 2026-10-25)
 
 | Item | Result |
 | --- | --- |
 | Land five weeks of uncommitted work | Kernel `chore/land-2026-10` (10 subsystem commits), OS `chore/land-2026-10` (8 area commits), tag `sdk-abi74-uapi0.16` in both |
 | Umbrella repository | This repository: manifest, `scripts/sync.py`, `scripts/wt_pair.py`, `scripts/workspace.py` (`sdk-all`, `distro-all`, `matrix`) |
 | Evidence tree | Moved to `ObfuscationEvidence/archive/` (ignored), small text evidence versioned, `build` symlink keeps historical paths valid |
-| Build hygiene | SimpleFS rescue image fits without a format change (F1); CI caches the toolchain, runs a three-architecture fast lane and exports SDK artifacts; xmake layout documented |
+| Build hygiene | SimpleFS rescue image fits without a format change (F1); CI consumes the SysToolchain release archives (installed package cached per architecture, job timeouts), runs a three-architecture fast lane and exports SDK artifacts; xmake layout documented |
 | Documentation | 133 per-slice notes moved to `docs/qualification/` in both repositories; stale ABI/QEMU/profile statements fixed; progress log frozen; `STATUS.md` generated from the ledger; decision records 0001–0003 |
-| Clutter | Root `.git`, `.agents`, `.codex`, `.aws`, `.xmake`, `rename-uncertainty-attempt-01` and the empty `modules/system-apps` removed |
+| Clutter | Root `.git`, `.agents`, `.codex`, `.aws`, `.xmake`, `rename-uncertainty-attempt-01` and the empty `modules/system-apps` removed; empty `.agents`/`.codex` in Kernel and OS removed |
 
-Still open from the review: the journalled-image dependency on a Linux kernel
-image (OS `fix/mkfs-e2fsprogs`, needs an e2fsprogs package), publishing the
-SysToolchain 0.1.0 release so CI can stop building GCC from source, and the
-code refactors below.
+Audit of 2026-10-25. Pins, tags, the ledger-generated `STATUS.md`, the decision
+records and the evidence layout were re-checked; the local fast lane (x86_64,
+arm32, ppc) and the x86_64 ext4 and SimpleFS boots pass. The CI row had never
+held: no Kernel or OS run had completed since May.
+
+- SysToolchain `v0.1.0` failed in all ten jobs at the static QEMU + SDL2 link,
+  and the package source build failed at the xmake-repo libsdl2 install and then
+  hung every job for six hours. QEMU now links the host GLib, Pixman and SDL2
+  dynamically with `--without-default-features`; the release job declares
+  `python3-tomli` and `gawk`; the recipe's source fallback uses host development
+  files. All ten archives were built, verified and relocated in `ubuntu:22.04`.
+- Kernel and OS resolve the release archives, CI installs the QEMU runtime
+  libraries and jobs time out after 60–90 minutes.
+- The pinned QEMU 10.2.0 enforces alignment for MMU-off (Device memory)
+  accesses, which exposed unaligned accesses in Arm kernel code: aarch64 and
+  arm32 stopped at boot. Fixed with `-mstrict-align` / `-mno-unaligned-access`;
+  all ten kernel profiles pass `xmake test` on the packaged QEMU, and x86_64 and
+  arm32 pass every OS CI step on it.
+
+Still open: publishing the `v0.1.0` release (move the tag to the fixed commit)
+and confirming one green CI run on it; the OS ppc distro step
+(`qemu-distro --require-native`) cannot pass, because native PPC ELF admission
+needs the `e500v2` profile that `qemu-distro` never selects and, with it,
+userland stops after timer preemption; the standalone kernel qualification
+scripts keep their own Arm flag lists without the alignment flags; the
+journalled-image dependency on a Linux kernel image (OS `fix/mkfs-e2fsprogs`,
+needs an e2fsprogs package, P2); and the code refactors below.
 
 ## P1: foundations
 

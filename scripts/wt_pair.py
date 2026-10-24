@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Create a paired kernel/OS worktree under wt/.
 
-  wt_pair.py --topic mm-general [--kind feat|refactor|chore|fix] [--base-branch chore/land-2026-10]
+  wt_pair.py --topic mm-general [--kind feat|refactor|chore|fix|docs] [--base-branch main]
              [--kernel-only | --os-only]
 
 Creates wt/kernel-<topic> (branch <kind>/<topic>) and wt/os-<topic> (same branch

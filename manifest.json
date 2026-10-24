@@ -9,28 +9,28 @@
   "components": {
     "ObfuscationKernel": {
       "url": "https://github.com/ObfuscationProject/ObfuscationKernel.git",
-      "branch": "chore/land-2026-10",
-      "commit": "bc654663da91b78ce7f1bd3d38a20a696602dc5e"
+      "branch": "main",
+      "commit": "438f26014f742afd06533308110a53b735cfb765"
     },
     "ObfuscationOS": {
       "url": "https://github.com/ObfuscationProject/ObfuscationOS.git",
-      "branch": "chore/land-2026-10",
-      "commit": "1d3f72faad133a74cdf484353e12698ec052562d"
+      "branch": "main",
+      "commit": "507446b244efe45769ae349f1086cf69d5cd4b5d"
     },
     "SysToolchain": {
       "url": "https://github.com/ObfuscationProject/SysToolchain.git",
-      "branch": "docs/plan",
-      "commit": "04420315c4057ad3a7ac93ed43811fdb761089e2"
+      "branch": "main",
+      "commit": "0ee1e08a5c694193d5af540389b8fe502dc650b7"
     },
     "ObfuscationRepo": {
       "url": "https://github.com/ObfuscationProject/ObfuscationRepo.git",
-      "branch": "docs/plan",
-      "commit": "e2adfebddfea7d4e71f65b89f35089090cfda1c1"
+      "branch": "main",
+      "commit": "eb5f776cba8961b075f9824ba9d0356112ae1bff"
     },
     "ObfuscationEvidence": {
       "url": "https://github.com/ObfuscationProject/ObfuscationEvidence.git",
       "branch": "main",
-      "commit": "2564985c615a869ac0712622e53db59e595aed6d"
+      "commit": "3be882f85ab51e430e14a203ae0b7a4b947296f3"
     }
   }
 }

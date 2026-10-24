@@ -1,7 +1,7 @@
 # ObfuscationProject workspace
 
 Umbrella repository for the Obfuscation operating system project. It pins the
-component repositories in `manifest.json`, provides workspace-level xmake tasks
+component repositories in `manifest.json`, provides workspace-level scripts
 and holds the cross-component plan. It contains no product source.
 
 | Component | Role |
@@ -18,17 +18,22 @@ and holds the cross-component plan. It contains no product source.
 git clone https://github.com/ObfuscationProject/ObfuscationProject.git
 cd ObfuscationProject
 python3 scripts/sync.py            # clone/fetch components and check out the pinned commits
-xmake sdk-all --arch=x86_64        # export the kernel SDK for one architecture
-xmake distro-all --arch=x86_64     # build the OS consumer against it and boot it in QEMU
+python3 scripts/workspace.py sdk-all -a x86_64      # build, test and export the kernel SDK
+python3 scripts/workspace.py distro-all -a x86_64   # build the OS consumer against it and boot it in QEMU
 ```
 
 `python3 scripts/sync.py --pin` rewrites `manifest.json` from the components'
-current HEADs. `xmake matrix` runs the three-architecture fast lane (x86_64,
-arm32, ppc) across kernel and OS. `xmake wt-pair --topic=NAME` creates a paired
-kernel/OS worktree under `wt/`.
+current HEADs. `python3 scripts/workspace.py matrix` runs the three-architecture
+fast lane (x86_64, arm32, ppc) across kernel and OS. `python3 scripts/wt_pair.py
+--topic NAME` creates a paired kernel/OS worktree under `wt/`.
 
-Local toolchains: pass `--systoolchain_dir=DIR` to the tasks, or let each
-component resolve the `systoolchain` package from ObfuscationRepo.
+Local toolchains: pass `--systoolchain-dir DIR` (one installation per triple) to
+the workspace commands, or let each component resolve the `systoolchain` package
+from ObfuscationRepo.
+
+There is deliberately no `xmake.lua` at this level: xmake resolves the project
+directory to the outermost ancestor holding an `xmake.lua`, so a workspace-level
+file would hijack every component build.
 
 ## Plan
 

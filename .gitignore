@@ -8,6 +8,6 @@
 /wt/
 /build
 /.xmake/
-/.out/
+
 __pycache__/
 *.pyc

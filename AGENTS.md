@@ -26,6 +26,9 @@
 - This directory is the umbrella repository. `manifest.json` pins the component
   repositories; the components themselves are ignored here and have their own
   history. Run git inside a component, never at this root for component files.
+- Never add an `xmake.lua` at this level: xmake resolves the project directory to
+  the outermost ancestor holding one, which would hijack every component build.
+  Workspace commands are Python scripts under `scripts/`.
 - Work happens in paired worktrees under `wt/` (see `PLAN.md` and each
   component's `docs/PLAN.md`). A kernel worktree exports an SDK; its paired OS
   worktree points `--kernel_sdk` at it.

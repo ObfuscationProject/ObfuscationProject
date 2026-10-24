@@ -8,7 +8,7 @@ ObfuscationOS `docs/plans/README.md`; nothing here closes a gate.
 
 ## Rules
 
-- Paired worktrees under `wt/`: `xmake wt-pair --topic=NAME` creates
+- Paired worktrees under `wt/`: `python3 scripts/wt_pair.py --topic NAME` creates
   `wt/kernel-NAME` and `wt/os-NAME`; the OS side consumes the kernel side's SDK
   export. A worktree lives at most 4–6 weeks.
 - Fast lane everywhere: x86_64, arm32 (32-bit), ppc (big-endian). Full ten
@@ -22,7 +22,7 @@ ObfuscationOS `docs/plans/README.md`; nothing here closes a gate.
 | Item | Result |
 | --- | --- |
 | Land five weeks of uncommitted work | Kernel `chore/land-2026-10` (10 subsystem commits), OS `chore/land-2026-10` (8 area commits), tag `sdk-abi74-uapi0.16` in both |
-| Umbrella repository | This repository: manifest, `scripts/sync.py`, `scripts/wt_pair.py`, meta tasks `sdk-all`, `distro-all`, `matrix`, `wt-pair`, `sync` |
+| Umbrella repository | This repository: manifest, `scripts/sync.py`, `scripts/wt_pair.py`, `scripts/workspace.py` (`sdk-all`, `distro-all`, `matrix`) |
 | Evidence tree | Moved to `ObfuscationEvidence/archive/` (ignored), small text evidence versioned, `build` symlink keeps historical paths valid |
 | Build hygiene | SimpleFS rescue image fits without a format change (F1); CI caches the toolchain, runs a three-architecture fast lane and exports SDK artifacts; xmake layout documented |
 | Documentation | 133 per-slice notes moved to `docs/qualification/` in both repositories; stale ABI/QEMU/profile statements fixed; progress log frozen; `STATUS.md` generated from the ledger; decision records 0001–0003 |

@@ -1,0 +1,13 @@
+# Component repositories have their own history; the manifest pins them.
+/ObfuscationKernel/
+/ObfuscationOS/
+/ObfuscationRepo/
+/SysToolchain/
+/ObfuscationEvidence/
+# Worktrees and the evidence archive symlink.
+/wt/
+/build
+/.xmake/
+/.out/
+__pycache__/
+*.pyc

@@ -15,7 +15,7 @@
     "ObfuscationOS": {
       "url": "https://github.com/ObfuscationProject/ObfuscationOS.git",
       "branch": "chore/land-2026-10",
-      "commit": "51a6f792a4b9d483df2ee60fc3c10d22054eb9e3"
+      "commit": "1d3f72faad133a74cdf484353e12698ec052562d"
     },
     "SysToolchain": {
       "url": "https://github.com/ObfuscationProject/SysToolchain.git",

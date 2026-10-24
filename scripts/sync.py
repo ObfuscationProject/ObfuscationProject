@@ -4,6 +4,8 @@
   sync.py            clone missing components, fetch, check out pinned commits
   sync.py --pin      rewrite manifest.json from each component's current HEAD
   sync.py --status   print pinned vs current commit for each component
+  sync.py --latest   check out each component's origin/main instead of the pin
+  sync.py --validate check the manifest structure without touching checkouts
 """
 import argparse
 import json
@@ -24,9 +26,26 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pin", action="store_true")
     ap.add_argument("--status", action="store_true")
+    ap.add_argument("--latest", action="store_true")
+    ap.add_argument("--validate", action="store_true")
     args = ap.parse_args()
     manifest = json.loads(MANIFEST.read_text())
     components = manifest["components"]
+
+    if args.validate:
+        problems = []
+        for name, c in components.items():
+            for key in ("url", "branch", "commit"):
+                if key not in c:
+                    problems.append(f"{name}: missing {key}")
+            if not c.get("url", "").startswith("https://github.com/ObfuscationProject/"):
+                problems.append(f"{name}: unexpected url")
+            if len(c.get("commit", "")) != 40:
+                problems.append(f"{name}: commit is not a full SHA")
+        for problem in problems:
+            print(problem)
+        print(f"manifest: {len(components)} components, {'ok' if not problems else 'INVALID'}")
+        return 1 if problems else 0
 
     if args.pin:
         for name, c in components.items():
@@ -55,8 +74,9 @@ def main() -> int:
             print(f"{name}: working tree dirty, not checking out {c['commit'][:12]}", file=sys.stderr)
             rc = 1
             continue
-        subprocess.run(["git", "-C", str(repo), "checkout", "--detach", c["commit"]], check=True)
-        print(f"{name}: {c['commit'][:12]} ({c.get('branch', '')})")
+        target = "origin/main" if args.latest else c["commit"]
+        subprocess.run(["git", "-C", str(repo), "checkout", "-q", "--detach", target], check=True)
+        print(f"{name}: {git(repo, 'rev-parse', '--short=12', 'HEAD')} ({'origin/main' if args.latest else c.get('branch', '')})")
     return rc
 
 

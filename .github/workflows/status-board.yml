@@ -1,0 +1,41 @@
+name: status-board
+
+# Regenerates docs/ (index.html, STATUS_BOARD.md, status.json) from the current
+# main of every component and the hosted checks declared in status/modules.json,
+# then commits the result so GitHub Pages serves the live board.
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: status-board
+  cancel-in-progress: true
+
+jobs:
+  board:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
+      - name: Install host compilers
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential gcc-multilib g++-multilib
+      - name: Check out component mains
+        run: python3 scripts/sync.py --latest
+      - name: Generate the board
+        run: python3 scripts/status_board.py --run-checks --timeout 900 || true
+      - name: Commit the generated board
+        run: |
+          git config user.name "status-board"
+          git config user.email "status-board@users.noreply.github.com"
+          git add docs
+          if git diff --cached --quiet; then echo "board unchanged"; else git commit -m "board: regenerate" && git push; fi

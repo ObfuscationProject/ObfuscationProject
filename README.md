@@ -35,6 +35,18 @@ There is deliberately no `xmake.lua` at this level: xmake resolves the project
 directory to the outermost ancestor holding an `xmake.lua`, so a workspace-level
 file would hijack every component build.
 
+## Module board
+
+`status/modules.json` lists every module of the target architecture with its
+layer, tag (new / upgrade / move / shrink / keep), declared state (planned,
+scaffold, model, bounded, native, stable), the paths that must exist on each
+component's main and the hosted checks that must pass. `python3
+scripts/status_board.py --run-checks` measures presence and runs the checks, then
+writes `docs/index.html`, `docs/STATUS_BOARD.md` and `docs/status.json`. The
+`status-board` workflow regenerates them on every push and every six hours, and
+GitHub Pages serves `docs/` as the live board. Changing a module's state is a
+one-line edit to the JSON, reviewed like code.
+
 ## Plan
 
 `PLAN.md` holds the workspace-level phases and dependency graph; each component

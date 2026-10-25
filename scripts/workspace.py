@@ -5,12 +5,18 @@ a component repository.
   workspace.py sdk-all    [-a ARCH] [-m MODE] [--systoolchain-dir DIR] [--qemu-dir DIR]
   workspace.py distro-all [-a ARCH] [-m MODE] [--systoolchain-dir DIR]
   workspace.py matrix     [-m MODE] [--systoolchain-dir DIR] [--qemu-dir DIR]
+  workspace.py cross-tests [-a ARCH] [-m MODE]
+
+cross-tests runs the OS suites that compare the SDK consumer with the kernel
+checkout itself (they skip in the OS CI, which has only the SDK artifact); sdk-all
+must have exported the SDK first. distro-all and matrix run them too.
 
 A root xmake.lua is deliberately absent: xmake resolves the project directory
 to the outermost ancestor that holds an xmake.lua, so a workspace-level
 xmake.lua would hijack every component build.
 """
 import argparse
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -61,10 +67,22 @@ def sdk_all(args, arch: str) -> None:
     xmake(KERNEL, "-y", "-b", "kernel-sdk")
 
 
+def cross_tests(args, arch: str) -> None:
+    tools = OS / "tests" / "tools"
+    modules = sorted(p.stem for p in tools.glob("test_*.py") if "import kernel_checkout" in p.read_text())
+    if not modules:
+        raise SystemExit("no OS suite imports tests/tools/kernel_checkout.py")
+    env = dict(os.environ, OK_REQUIRE_KERNEL_CHECKOUT="1", OK_KERNEL_CHECKOUT=str(KERNEL),
+               OK_TEST_KERNEL_SDK=str(KERNEL / "build" / "sdk" / arch / args.mode), PYTHONDONTWRITEBYTECODE="1")
+    print(f"[{OS.name}] cross-tests: {' '.join(modules)}", flush=True)
+    subprocess.run([sys.executable, "-B", "-m", "unittest", *modules], cwd=tools, env=env, check=True)
+
+
 def distro_all(args, arch: str, boot: bool = True) -> None:
     configure_os(args, arch)
     for target in ("kernel-sdk-check", "uapi-test", "libc-test", "distro_image", "rootfs-ext4"):
         xmake(OS, "-y", "-b", target)
+    cross_tests(args, arch)
     if boot:
         xmake(OS, "qemu-distro", "--fs=ext4", "--require-native", "--timeout=30")
 
@@ -72,7 +90,7 @@ def distro_all(args, arch: str, boot: bool = True) -> None:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ("sdk-all", "distro-all", "matrix"):
+    for name in ("sdk-all", "distro-all", "matrix", "cross-tests"):
         p = sub.add_parser(name)
         if name != "matrix":
             p.add_argument("-a", "--arch", default="x86_64")
@@ -84,6 +102,8 @@ def main() -> int:
         sdk_all(args, args.arch)
     elif args.cmd == "distro-all":
         distro_all(args, args.arch)
+    elif args.cmd == "cross-tests":
+        cross_tests(args, args.arch)
     else:
         failed = []
         for lane in FAST_LANE:

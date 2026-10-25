@@ -24,7 +24,9 @@ python3 scripts/workspace.py distro-all -a x86_64   # build the OS consumer agai
 
 `python3 scripts/sync.py --pin` rewrites `manifest.json` from the components'
 current HEADs. `python3 scripts/workspace.py matrix` runs the three-architecture
-fast lane (x86_64, arm32, ppc) across kernel and OS. `python3 scripts/wt_pair.py
+fast lane (x86_64, arm32, ppc) across kernel and OS. `python3 scripts/workspace.py
+cross-tests -a ARCH` runs the OS suites that compare the SDK consumer with the
+kernel checkout itself; OS CI skips them because it has only the SDK artifact. `python3 scripts/wt_pair.py
 --topic NAME` creates a paired kernel/OS worktree under `wt/`.
 
 Local toolchains: pass `--systoolchain-dir DIR` (one installation per triple) to

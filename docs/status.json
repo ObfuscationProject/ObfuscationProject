@@ -1,10 +1,10 @@
 {
- "generated": "2026-10-24T19:09:38+00:00",
+ "generated": "2026-10-25T01:04:10+00:00",
  "heads": {
-  "ObfuscationOS": "4b7fbf917177",
-  "ObfuscationKernel": "cb6a6f4daab4",
-  "SysToolchain": "0ee1e08a5c69",
-  "ObfuscationProject": "fd53f27659c7",
+  "ObfuscationOS": "efe405e7e5a8",
+  "ObfuscationKernel": "20ec30a23e25",
+  "SysToolchain": "01660933bca5",
+  "ObfuscationProject": "f5b359edc763",
   "ObfuscationEvidence": "3be882f85ab5"
  },
  "checks_run": true,
@@ -335,7 +335,7 @@
    "title": "Kernel SDK 边界",
    "tag": "upgrade",
    "state": "stable",
-   "summary": "ABI 74 / UAPI 0.16.0 今天；目标 ABI 75+ / UAPI 0.17+（display.h、input.h、模块加载 ABI）；manifest 哈希 admission；umbrella manifest 钉四个 SHA",
+   "summary": "ABI 74 / UAPI 0.16.0 今天；目标 ABI 75+ / UAPI 0.17+（display.h、input.h、模块加载 ABI）；manifest 哈希 admission；umbrella manifest 钉五个组件 SHA",
    "repo": "ObfuscationKernel",
    "plan": "chore/sdk75-consumer",
    "paths": [

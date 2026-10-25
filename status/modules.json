@@ -689,7 +689,7 @@
       "title": "SysToolchain · ObfuscationRepo",
       "tag": "keep",
       "state": "stable",
-      "summary": "不变；CI 消费预编译发布件（等 v0.1.0 发布完成）",
+      "summary": "不变；v0.1.0 已发布十个目标的预编译包，Kernel/OS 和 CI 默认下载使用",
       "repo": "SysToolchain",
       "plan": "PLAN.md",
       "paths": [

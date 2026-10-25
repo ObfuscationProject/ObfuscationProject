@@ -47,8 +47,13 @@ held: no Kernel or OS run had completed since May.
   all ten kernel profiles pass `xmake test` on the packaged QEMU, and x86_64 and
   arm32 pass every OS CI step on it.
 
-Still open: publishing the `v0.1.0` release (move the tag to the fixed commit)
-and confirming one green CI run on it; the OS ppc distro step
+SysToolchain `v0.1.0` was published on 2026-10-25 (ten archives with checksums,
+built by the release workflow) and the Kernel CI passes on all ten profiles.
+
+Still open: the OS `artifact-test` step fails in CI with 19 of 1268 tests,
+because those suites read the sibling kernel checkout (`tools/export_sdk.py`,
+`include/`, `build/sdk/x86_64/debug`), which only exists in a workspace; they
+must consume the SDK artifact or move to a workspace-level lane. The OS ppc distro step
 (`qemu-distro --require-native`) cannot pass, because native PPC ELF admission
 needs the `e500v2` profile that `qemu-distro` never selects and, with it,
 userland stops after timer preemption; the standalone kernel qualification

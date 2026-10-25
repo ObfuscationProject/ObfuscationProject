@@ -1,6 +1,6 @@
 # ObfuscationProject module board
 
-Generated 2026-10-25T20:54:23+00:00 from ObfuscationOS@efe405e7e5a8, ObfuscationKernel@20ec30a23e25, SysToolchain@01660933bca5, ObfuscationProject@666a1f766868, ObfuscationEvidence@3be882f85ab5.
+Generated 2026-10-25T21:55:46+00:00 from ObfuscationOS@efe405e7e5a8, ObfuscationKernel@20ec30a23e25, SysToolchain@01660933bca5, ObfuscationProject@bef9bbf9644c, ObfuscationEvidence@3be882f85ab5.
 
 State is the declared judgement from the plans; presence counts declared paths found on main; checks are hosted commands (run).
 
@@ -102,7 +102,7 @@ State is the declared judgement from the plans; presence counts declared paths f
 
 | Module | Tag | State | Presence | Checks | Plan | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| SysToolchain · ObfuscationRepo | 不变 | 稳定 | 1/1 | 1/1 pass | PLAN.md | 不变；CI 消费预编译发布件（等 v0.1.0 发布完成） |
+| SysToolchain · ObfuscationRepo | 不变 | 稳定 | 1/1 | 1/1 pass | PLAN.md | 不变；v0.1.0 已发布十个目标的预编译包，Kernel/OS 和 CI 默认下载使用 |
 | umbrella 仓库 + manifest | 新增 | 稳定 | 3/3 | 1/1 pass | — | 钉五个 SHA；工作区脚本；状态看板 |
 | ObfuscationEvidence | 新增 | 稳定 | 2/2 | — | PLAN.md | 证据与鉴定工具按分支@SHA 归档 |
 | ledger → 能力矩阵 | 新增 | 脚手架 | 3/3 | — | P0 | 文档与 _POSIX_* 策略由 ledger.json 生成 |

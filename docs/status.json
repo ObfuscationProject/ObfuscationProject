@@ -1,10 +1,10 @@
 {
- "generated": "2026-10-25T20:54:23+00:00",
+ "generated": "2026-10-25T21:55:46+00:00",
  "heads": {
   "ObfuscationOS": "efe405e7e5a8",
   "ObfuscationKernel": "20ec30a23e25",
   "SysToolchain": "01660933bca5",
-  "ObfuscationProject": "666a1f766868",
+  "ObfuscationProject": "bef9bbf9644c",
   "ObfuscationEvidence": "3be882f85ab5"
  },
  "checks_run": true,
@@ -825,7 +825,7 @@
    "title": "SysToolchain · ObfuscationRepo",
    "tag": "keep",
    "state": "stable",
-   "summary": "不变；CI 消费预编译发布件（等 v0.1.0 发布完成）",
+   "summary": "不变；v0.1.0 已发布十个目标的预编译包，Kernel/OS 和 CI 默认下载使用",
    "repo": "SysToolchain",
    "plan": "PLAN.md",
    "paths": [

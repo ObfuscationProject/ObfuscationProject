@@ -58,9 +58,10 @@ because `qemu-distro` never selected the e500v2 profile that native PPC ELF
 admission requires; it now does, and the full OS CI fast lane passes on the
 pinned QEMU 10.2.0 (QEMU 8.2 still stops after timer preemption on ppc).
 
-Still open: the standalone kernel qualification
-scripts keep their own Arm flag lists without the alignment flags; the
-journalled-image dependency on a Linux kernel image (OS `fix/mkfs-e2fsprogs`,
+The standalone kernel qualification scripts now carry the same Arm alignment
+flags.
+
+Still open: the journalled-image dependency on a Linux kernel image (OS `fix/mkfs-e2fsprogs`,
 needs an e2fsprogs package, P2); and the code refactors below.
 
 ## P1: foundations

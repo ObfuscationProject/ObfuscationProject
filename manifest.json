@@ -10,7 +10,7 @@
     "ObfuscationKernel": {
       "url": "https://github.com/ObfuscationProject/ObfuscationKernel.git",
       "branch": "main",
-      "commit": "20ec30a23e25d37ef5c9017b7ff6090618821bad"
+      "commit": "7ddd8bb99333bd184d87f8ce6cd8539e775facbc"
     },
     "ObfuscationOS": {
       "url": "https://github.com/ObfuscationProject/ObfuscationOS.git",

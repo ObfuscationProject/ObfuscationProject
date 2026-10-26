@@ -15,7 +15,7 @@
     "ObfuscationOS": {
       "url": "https://github.com/ObfuscationProject/ObfuscationOS.git",
       "branch": "main",
-      "commit": "71affb947909d326cad40a9b9ab47c2decd40969"
+      "commit": "658b18b8099a6601010b4a38133dc9be598f51be"
     },
     "SysToolchain": {
       "url": "https://github.com/ObfuscationProject/SysToolchain.git",

@@ -53,12 +53,12 @@ built by the release workflow) and the Kernel CI passes on all ten profiles.
 The OS `artifact-test` step then failed in CI (19 of 1268 tests read the sibling
 kernel checkout; four suites assumed x86_64). Suites that need the checkout now
 skip without it and run in the workspace lane (`workspace.py cross-tests`), and
-the OS CI passes on x86_64 and arm32.
+the OS CI passes on x86_64 and arm32. The ppc distro step was refused at startup
+because `qemu-distro` never selected the e500v2 profile that native PPC ELF
+admission requires; it now does, and the full OS CI fast lane passes on the
+pinned QEMU 10.2.0 (QEMU 8.2 still stops after timer preemption on ppc).
 
-Still open: the OS ppc distro step
-(`qemu-distro --require-native`) cannot pass, because native PPC ELF admission
-needs the `e500v2` profile that `qemu-distro` never selects and, with it,
-userland stops after timer preemption; the standalone kernel qualification
+Still open: the standalone kernel qualification
 scripts keep their own Arm flag lists without the alignment flags; the
 journalled-image dependency on a Linux kernel image (OS `fix/mkfs-e2fsprogs`,
 needs an e2fsprogs package, P2); and the code refactors below.

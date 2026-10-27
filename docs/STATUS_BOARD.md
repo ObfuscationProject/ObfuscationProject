@@ -1,6 +1,6 @@
 # ObfuscationProject module board
 
-Generated 2026-10-26T22:51:01+00:00 from ObfuscationOS@658b18b8099a, ObfuscationKernel@7ddd8bb99333, SysToolchain@01660933bca5, ObfuscationProject@3a7f62fcbb2a, ObfuscationEvidence@3be882f85ab5.
+Generated 2026-10-27T05:08:44+00:00 from ObfuscationOS@658b18b8099a, ObfuscationKernel@05c985e1cec5, SysToolchain@01660933bca5, ObfuscationProject@1867222cef63, ObfuscationEvidence@3be882f85ab5.
 
 State is the declared judgement from the plans; presence counts declared paths found on main; checks are hosted commands (run).
 
@@ -85,7 +85,7 @@ State is the declared judgement from the plans; presence counts declared paths f
 
 | Module | Tag | State | Presence | Checks | Plan | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| mm | 升级 | 脚手架 | 4/4 | 2/2 pass | feat/mm-general | 真实内存图、运行期帧分配器、slab、VM / COW、配额、回收 |
+| mm | 升级 | 脚手架 | 2/4 | 1/2 pass | feat/mm-general | 真实内存图、运行期帧分配器、slab、VM / COW、配额、回收 |
 | irq | 新增 | 脚手架 | 2/2 | 1/1 pass | feat/irq-wait-time | 控制器 ×10、IRQ 驱动唤醒、工作队列 |
 | time | 升级 | 脚手架 | 2/2 | — | feat/irq-wait-time | 校准时钟、POSIX 定时器 |
 | smp | 新增 | 模型 | 2/2 | — | feat/smp-bringup | AP 启动、TLB shootdown、锁级别（先 x86_64 / aarch64 / rv64） |

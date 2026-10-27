@@ -1,10 +1,10 @@
 {
- "generated": "2026-10-26T22:51:01+00:00",
+ "generated": "2026-10-27T05:08:44+00:00",
  "heads": {
   "ObfuscationOS": "658b18b8099a",
-  "ObfuscationKernel": "7ddd8bb99333",
+  "ObfuscationKernel": "05c985e1cec5",
   "SysToolchain": "01660933bca5",
-  "ObfuscationProject": "3a7f62fcbb2a",
+  "ObfuscationProject": "1867222cef63",
   "ObfuscationEvidence": "3be882f85ab5"
  },
  "checks_run": true,
@@ -473,7 +473,7 @@
     {
      "command": "python3 -B scripts/check_runtime_split.py",
      "ok": true,
-     "detail": "units: runtime.cpp, user.cpp"
+     "detail": "src/user/runtime/entry.cpp: 1476 lines"
     }
    ]
   },
@@ -676,19 +676,22 @@
     "python3 -B scripts/test_runtime_frames.py",
     "python3 -B scripts/test_frame_allocator.py"
    ],
-   "present": 4,
+   "present": 2,
    "declared": 4,
-   "missing": [],
+   "missing": [
+    "include/ok/memory/runtime_frames.hpp",
+    "src/memory/runtime_frames.cpp"
+   ],
    "check_results": [
     {
      "command": "python3 -B scripts/test_runtime_frames.py",
-     "ok": true,
-     "detail": "OK_HOST runtime_frames model=pass"
+     "ok": false,
+     "detail": "python3: can't open file '/home/runner/work/ObfuscationProject/ObfuscationProject/ObfuscationKernel/scripts/test_runtime_frames.py': [Errno 2] No such file or directory"
     },
     {
      "command": "python3 -B scripts/test_frame_allocator.py",
      "ok": true,
-     "detail": "PASS: bootstrap physical frame bookkeeping (hosted model)"
+     "detail": "PASS: runtime-sized physical frame bookkeeping (hosted model)"
     }
    ]
   },

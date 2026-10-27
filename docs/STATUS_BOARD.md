@@ -1,6 +1,6 @@
 # ObfuscationProject module board
 
-Generated 2026-10-27T07:02:44+00:00 from ObfuscationOS@016b7ab90acc, ObfuscationKernel@05c985e1cec5, SysToolchain@01660933bca5, ObfuscationProject@500df201be55, ObfuscationEvidence@bc93ab3e7bc6.
+Generated 2026-10-27T09:22:14+00:00 from ObfuscationOS@d08d3a8812fc, ObfuscationKernel@3418bec609bc, SysToolchain@01660933bca5, ObfuscationProject@f4c9cc14c886, ObfuscationEvidence@994db336a2b0.
 
 State is the declared judgement from the plans; presence counts declared paths found on main; checks are hosted commands (run).
 
@@ -49,7 +49,7 @@ State is the declared judgement from the plans; presence counts declared paths f
 
 | Module | Tag | State | Presence | Checks | Plan | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| Kernel SDK 边界 | 升级 | 稳定 | 2/2 | — | chore/sdk75-consumer | ABI 75 / UAPI 0.16.0 今天；目标 ABI 76+ / UAPI 0.17+（display.h、input.h、模块加载 ABI）；manifest 哈希 admission；umbrella manifest 钉五个组件 SHA |
+| Kernel SDK 边界 | 升级 | 稳定 | 2/2 | — | chore/sdk75-consumer | ABI 76 / UAPI 0.16.0 今天；目标 ABI 77+ / UAPI 0.17+（display.h、input.h、模块加载 ABI）；manifest 哈希 admission；umbrella manifest 钉五个组件 SHA |
 
 ## 系统调用层 · Kernel
 

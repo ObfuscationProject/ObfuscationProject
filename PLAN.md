@@ -74,6 +74,11 @@ needs an e2fsprogs package, P2); and the code refactors below.
 | `refactor/user-runtime-split` | Kernel | M | — |
 | `feat/musl-primary` | OS (needs SysToolchain 0.2.0 musl family) | L | mm-general |
 
+Merged: `refactor/user-runtime-split` (kernel PR #1, tag `p1-user-runtime-split`,
+ABI 74); `feat/mm-general` with OS `chore/sdk75-consumer` (kernel PR #2, OS PR #4,
+tag `sdk-abi75-uapi0.16` in both, module ABI 75). `refactor/ext4-layout` merges
+onto the ABI 75 main.
+
 ## P2: platform and protocols
 
 | Worktree | Component | Size | Depends on |

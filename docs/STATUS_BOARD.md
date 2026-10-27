@@ -1,12 +1,12 @@
 # ObfuscationProject module board
 
-Generated 2026-10-27T05:08:44+00:00 from ObfuscationOS@658b18b8099a, ObfuscationKernel@05c985e1cec5, SysToolchain@01660933bca5, ObfuscationProject@1867222cef63, ObfuscationEvidence@3be882f85ab5.
+Generated 2026-10-27T07:02:44+00:00 from ObfuscationOS@016b7ab90acc, ObfuscationKernel@05c985e1cec5, SysToolchain@01660933bca5, ObfuscationProject@500df201be55, ObfuscationEvidence@bc93ab3e7bc6.
 
 State is the declared judgement from the plans; presence counts declared paths found on main; checks are hosted commands (run).
 
 | 计划 (planned) | 脚手架 (scaffold) | 模型 (model) | 有界 (bounded) | 原生 (native) | 稳定 (stable) |
 | --- | --- | --- | --- | --- | --- |
-| 7 | 8 | 3 | 14 | 8 | 4 |
+| 7 | 7 | 3 | 14 | 9 | 4 |
 
 ## 用户会话 · OS · 非特权进程
 
@@ -49,7 +49,7 @@ State is the declared judgement from the plans; presence counts declared paths f
 
 | Module | Tag | State | Presence | Checks | Plan | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| Kernel SDK 边界 | 升级 | 稳定 | 2/2 | — | chore/sdk75-consumer | ABI 74 / UAPI 0.16.0 今天；目标 ABI 75+ / UAPI 0.17+（display.h、input.h、模块加载 ABI）；manifest 哈希 admission；umbrella manifest 钉五个组件 SHA |
+| Kernel SDK 边界 | 升级 | 稳定 | 2/2 | — | chore/sdk75-consumer | ABI 75 / UAPI 0.16.0 今天；目标 ABI 76+ / UAPI 0.17+（display.h、input.h、模块加载 ABI）；manifest 哈希 admission；umbrella manifest 钉五个组件 SHA |
 
 ## 系统调用层 · Kernel
 
@@ -85,7 +85,7 @@ State is the declared judgement from the plans; presence counts declared paths f
 
 | Module | Tag | State | Presence | Checks | Plan | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| mm | 升级 | 脚手架 | 2/4 | 1/2 pass | feat/mm-general | 真实内存图、运行期帧分配器、slab、VM / COW、配额、回收 |
+| mm | 升级 | 原生 | 7/7 | 4/4 pass | feat/mm-general | 真实内存图、运行期帧分配器、slab、VM / COW、配额、回收 |
 | irq | 新增 | 脚手架 | 2/2 | 1/1 pass | feat/irq-wait-time | 控制器 ×10、IRQ 驱动唤醒、工作队列 |
 | time | 升级 | 脚手架 | 2/2 | — | feat/irq-wait-time | 校准时钟、POSIX 定时器 |
 | smp | 新增 | 模型 | 2/2 | — | feat/smp-bringup | AP 启动、TLB shootdown、锁级别（先 x86_64 / aarch64 / rv64） |

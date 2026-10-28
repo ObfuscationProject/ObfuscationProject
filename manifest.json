@@ -20,7 +20,7 @@
     "SysToolchain": {
       "url": "https://github.com/ObfuscationProject/SysToolchain.git",
       "branch": "main",
-      "commit": "01660933bca519e63b7e0714344fa7ed9547b055"
+      "commit": "20e7f682d6a570d07034891abfea9ca9514a2bf5"
     },
     "ObfuscationRepo": {
       "url": "https://github.com/ObfuscationProject/ObfuscationRepo.git",

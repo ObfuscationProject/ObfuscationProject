@@ -85,6 +85,16 @@ argv/envp limits and ENOEXEC, the 128-inode ext4 node cache, path component
 length, device nodes, unrouted syscalls and MIPS signal-handler resume (OS
 `docs/qualification/MUSL_USERLAND.md`).
 
+Open: `feat/irq-wait-time` exists only as the P0 scaffold (Kernel issue #4), so
+P1 is not closed. Review of 2026-10-28: the workspace fast lane (kernel build,
+`xmake test`, SDK export, OS consumer, cross-tests) passes on x86_64, arm32 and
+ppc. The standalone QEMU execution probes, broken by `feat/mm-general`, are
+restored and the runtime-split ratchet and the P1 hosted suites run in CI (Kernel
+PR #9). Filed: Kernel #5 (hosted runners not in CI, 63 of them no longer
+build), #6 (Linux personality limits on the WT1.5 gate), #7 (ext4 128-node
+cache), #8 (MIPS signal handlers halt the runtime); OS #7 (musl userland not in
+CI); SysToolchain #1 (powerpc-eabi without the soft-float multilib).
+
 ## P2: platform and protocols
 
 | Worktree | Component | Size | Depends on |

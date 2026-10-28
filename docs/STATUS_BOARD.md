@@ -1,12 +1,12 @@
 # ObfuscationProject module board
 
-Generated 2026-10-28T05:46:13+00:00 from ObfuscationOS@d08d3a8812fc, ObfuscationKernel@3418bec609bc, SysToolchain@01660933bca5, ObfuscationProject@390d0bd85963, ObfuscationEvidence@994db336a2b0.
+Generated 2026-10-28T06:42:36+00:00 from ObfuscationOS@e07532f9be01, ObfuscationKernel@3418bec609bc, SysToolchain@01660933bca5, ObfuscationProject@6c7d588e736d, ObfuscationEvidence@f21bf4737fd3.
 
 State is the declared judgement from the plans; presence counts declared paths found on main; checks are hosted commands (run).
 
 | 计划 (planned) | 脚手架 (scaffold) | 模型 (model) | 有界 (bounded) | 原生 (native) | 稳定 (stable) |
 | --- | --- | --- | --- | --- | --- |
-| 7 | 7 | 3 | 14 | 9 | 4 |
+| 7 | 5 | 3 | 16 | 9 | 4 |
 
 ## 用户会话 · OS · 非特权进程
 
@@ -31,9 +31,9 @@ State is the declared judgement from the plans; presence counts declared paths f
 
 | Module | Tag | State | Presence | Checks | Plan | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| musl 1.2.5 静态 + 共享 + ld.so | 升级 | 脚手架 | 3/3 | 1/1 pass | feat/musl-primary | 主 libc；TLS、dlopen、pthread 取消 ×10 |
+| musl 1.2.5 静态 + 共享 + ld.so | 升级 | 有界 | 4/4 | 1/1 pass | feat/musl-primary | 主 libc；静态版经 xmake port-build 在 10 个 profile 上运行 BusyBox；共享 libc、ld.so、TLS、dlopen、pthread 取消待 feat/shared-musl-loader |
 | libstdc++ (hosted) · FreeType · HarfBuzz | 新增 | 计划 | — | — | feat/shared-musl-loader | 应用与工具包依赖；UTF-8 / CJK |
-| POSIX sh + toybox/busybox | 新增 | 脚手架 | 2/2 | — | feat/musl-primary | 脚本、展开、作业控制、coreutils 广度；许可证决策待定 |
+| POSIX sh + BusyBox | 新增 | 有界 | 4/4 | 1/1 pass | feat/musl-primary | BusyBox 1.37.0 作为 /bin（决策 0004）；8 个 profile 通过 sh 验收与测试子集，mips/mips64 受内核信号恢复限制；作业控制待 WT2.2 |
 | okcrt | 收缩 | 原生 | 2/2 | — | docs/decisions/0001 | 仅 init 引导与救援工具 |
 
 ## OS 内核态模块 · 真正可加载 · ABI N

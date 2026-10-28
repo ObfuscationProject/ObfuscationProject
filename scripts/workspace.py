@@ -73,7 +73,8 @@ def cross_tests(args, arch: str) -> None:
     if not modules:
         raise SystemExit("no OS suite imports tests/tools/kernel_checkout.py")
     env = dict(os.environ, OK_REQUIRE_KERNEL_CHECKOUT="1", OK_KERNEL_CHECKOUT=str(KERNEL),
-               OK_TEST_KERNEL_SDK=str(KERNEL / "build" / "sdk" / arch / args.mode), PYTHONDONTWRITEBYTECODE="1")
+               OK_TEST_KERNEL_SDK=str(KERNEL / "build" / "sdk" / arch / args.mode),
+               OK_TEST_KERNEL_ARCH=arch, OK_TEST_KERNEL_MODE=args.mode, PYTHONDONTWRITEBYTECODE="1")
     print(f"[{OS.name}] cross-tests: {' '.join(modules)}", flush=True)
     subprocess.run([sys.executable, "-B", "-m", "unittest", *modules], cwd=tools, env=env, check=True)
 

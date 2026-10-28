@@ -15,7 +15,7 @@
     "ObfuscationOS": {
       "url": "https://github.com/ObfuscationProject/ObfuscationOS.git",
       "branch": "main",
-      "commit": "d08d3a8812fcadd1865df28c4ae83e0818eb46cc"
+      "commit": "e07532f9be01f162b02d0863ffc9aad61a2466bd"
     },
     "SysToolchain": {
       "url": "https://github.com/ObfuscationProject/SysToolchain.git",
@@ -30,7 +30,7 @@
     "ObfuscationEvidence": {
       "url": "https://github.com/ObfuscationProject/ObfuscationEvidence.git",
       "branch": "main",
-      "commit": "994db336a2b06b4d3989bd309f713ad5a3a1a35a"
+      "commit": "f21bf4737fd3d90a247e32d9750afb48ce0ff418"
     }
   }
 }

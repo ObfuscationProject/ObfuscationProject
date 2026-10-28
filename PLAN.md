@@ -72,13 +72,18 @@ needs an e2fsprogs package, P2); and the code refactors below.
 | `feat/irq-wait-time` | Kernel | L | mm-general |
 | `refactor/ext4-layout` | Kernel (paired OS `refactor/ext4-layout`) | M | — (align ABI at merge) |
 | `refactor/user-runtime-split` | Kernel | M | — |
-| `feat/musl-primary` | OS (needs SysToolchain 0.2.0 musl family) | L | mm-general |
+| `feat/musl-primary` | OS (freestanding-GCC fallback until the SysToolchain 0.2.0 musl family) | L | mm-general |
 
 Merged: `refactor/user-runtime-split` (kernel PR #1, tag `p1-user-runtime-split`,
 ABI 74); `feat/mm-general` with OS `chore/sdk75-consumer` (kernel PR #2, OS PR #4,
 tag `sdk-abi75-uapi0.16` in both, module ABI 75); `refactor/ext4-layout` with OS
 `refactor/ext4-layout` (kernel PR #3, OS PR #5, tag `sdk-abi76-uapi0.16` in both,
-module ABI 76).
+module ABI 76); OS `feat/musl-primary` (OS PR #6, tag `p1-musl-primary`, against
+the ABI 76 kernel): BusyBox 1.37.0 on static musl as `/bin` on ten profiles,
+guest sh gate on eight. Its exit gate waits for kernel work on `execve`
+argv/envp limits and ENOEXEC, the 128-inode ext4 node cache, path component
+length, device nodes, unrouted syscalls and MIPS signal-handler resume (OS
+`docs/qualification/MUSL_USERLAND.md`).
 
 ## P2: platform and protocols
 

@@ -203,17 +203,18 @@
       "layer": "userlib",
       "title": "musl 1.2.5 静态 + 共享 + ld.so",
       "tag": "upgrade",
-      "state": "scaffold",
-      "summary": "主 libc；TLS、dlopen、pthread 取消 ×10",
+      "state": "bounded",
+      "summary": "主 libc；静态版经 xmake port-build 在 10 个 profile 上运行 BusyBox；共享 libc、ld.so、TLS、dlopen、pthread 取消待 feat/shared-musl-loader",
       "repo": "ObfuscationOS",
       "plan": "feat/musl-primary",
       "paths": [
         "ports/musl/port.json",
         "tools/ports.py",
+        "tools/musl_cc.py",
         "tools/musl_source.py"
       ],
       "checks": [
-        "python3 -B -m unittest tests.tools.test_ports"
+        "python3 -B -m unittest tests.tools.test_ports tests.tools.test_musl_cc"
       ]
     },
     {
@@ -231,17 +232,21 @@
     {
       "id": "shell",
       "layer": "userlib",
-      "title": "POSIX sh + toybox/busybox",
+      "title": "POSIX sh + BusyBox",
       "tag": "new",
-      "state": "scaffold",
-      "summary": "脚本、展开、作业控制、coreutils 广度；许可证决策待定",
+      "state": "bounded",
+      "summary": "BusyBox 1.37.0 作为 /bin（决策 0004）；8 个 profile 通过 sh 验收与测试子集，mips/mips64 受内核信号恢复限制；作业控制待 WT2.2",
       "repo": "ObfuscationOS",
       "plan": "feat/musl-primary",
       "paths": [
-        "ports/dash/port.json",
-        "ports/toybox/port.json"
+        "ports/busybox/port.json",
+        "ports/busybox/busybox.config",
+        "tests/userland/sh-acceptance.sh",
+        "scripts/test_musl_shell.py"
       ],
-      "checks": []
+      "checks": [
+        "python3 -B -m unittest tests.tools.test_musl_shell_runner tests.tools.test_rootfs_profiles"
+      ]
     },
     {
       "id": "okcrt",

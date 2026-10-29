@@ -85,15 +85,29 @@ argv/envp limits and ENOEXEC, the 128-inode ext4 node cache, path component
 length, device nodes, unrouted syscalls and MIPS signal-handler resume (OS
 `docs/qualification/MUSL_USERLAND.md`).
 
-Open: `feat/irq-wait-time` exists only as the P0 scaffold (Kernel issue #4), so
-P1 is not closed. Review of 2026-10-28: the workspace fast lane (kernel build,
-`xmake test`, SDK export, OS consumer, cross-tests) passes on x86_64, arm32 and
-ppc. The standalone QEMU execution probes, broken by `feat/mm-general`, are
-restored and the runtime-split ratchet and the P1 hosted suites run in CI (Kernel
-PR #9). Filed: Kernel #5 (hosted runners not in CI, 63 of them no longer
-build), #6 (Linux personality limits on the WT1.5 gate), #7 (ext4 128-node
-cache), #8 (MIPS signal handlers halt the runtime); OS #7 (musl userland not in
-CI); SysToolchain #1 (powerpc-eabi without the soft-float multilib).
+Review of 2026-10-28: the workspace fast lane (kernel build, `xmake test`, SDK
+export, OS consumer, cross-tests) passed on x86_64, arm32 and ppc. The
+standalone QEMU execution probes, broken by `feat/mm-general`, were restored and
+the runtime-split ratchet and the P1 hosted suites run in CI (Kernel PR #9).
+Filed: Kernel #4–#8, OS #7 (musl userland not in CI), SysToolchain #1
+(powerpc-eabi without the soft-float multilib).
+
+Merged 2026-10-29: Kernel `chore/hosted-runners` (PR #10, issue #5, every
+hosted runner classified and run in CI), `fix/mips-signal-resume` (PR #11,
+#8), `fix/ext4-node-cache` (PR #12, #7) and `feat/linux-personality` (PR #13,
+#6, module ABI 77 for all four), with OS `fix/ext4-node-cache` and
+`feat/linux-personality` (OS PRs #8 and #9); tag `sdk-abi77-uapi0.16` in both.
+On ten profiles the musl `/bin` passes 54 sh checks and the BusyBox gate
+suite except 8 reviewed failures (31-byte path components). Receipts:
+ObfuscationEvidence `receipts/ObfuscationKernel@6968183/feat/linux-personality/`
+and `receipts/ObfuscationOS@9d9bae5/feat/linux-personality/`.
+
+Open: `feat/irq-wait-time` (Kernel issue #4) is in progress, so P1 is not
+closed. The kernel branch has the interrupt core, a compile-time controller per
+profile, the idle wait on interrupts and interrupt-driven console receive
+(per-profile status in its `docs/qualification/PLATFORM_INTERRUPTS.md`). Still
+to do: virtio completion through interrupts in the OS drivers, wait queues woken
+from interrupts, POSIX timers and `setitimer`, and the gate evidence.
 
 ## P2: platform and protocols
 

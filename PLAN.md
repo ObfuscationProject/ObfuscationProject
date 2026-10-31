@@ -102,12 +102,19 @@ suite except 8 reviewed failures (31-byte path components). Receipts:
 ObfuscationEvidence `receipts/ObfuscationKernel@6968183/feat/linux-personality/`
 and `receipts/ObfuscationOS@9d9bae5/feat/linux-personality/`.
 
-Open: `feat/irq-wait-time` (Kernel issue #4) is in progress, so P1 is not
-closed. The kernel branch has the interrupt core, a compile-time controller per
-profile, the idle wait on interrupts and interrupt-driven console receive
-(per-profile status in its `docs/qualification/PLATFORM_INTERRUPTS.md`). Still
-to do: virtio completion through interrupts in the OS drivers, wait queues woken
-from interrupts, POSIX timers and `setitimer`, and the gate evidence.
+Merged 2026-10-31: Kernel `feat/irq-wait-time` (PR #14, issue #4, module ABI
+78) with OS `feat/irq-wait-time` (OS PR #10); tag `sdk-abi78-uapi0.16` in both.
+Interrupt controllers on ten profiles and the idle wait on interrupts; virtio
+block, net and RNG (OS) and the kernel's input complete through interrupts from
+the root mount on; Linux `ITIMER_REAL`, `alarm` and the `timer_create` family.
+Exit gate: no device wait polled in a shell gate run on ten profiles, the
+monotonic clock within 100 ppm of the host's (the PC TSC calibration was 500-700
+ppm off and is fixed), timer interrupt latency measured for idle and user ticks
+(kernel `docs/qualification/PLATFORM_INTERRUPTS.md`). A four-round pre-merge
+review fixed the defects it found before the merge. Receipts: ObfuscationEvidence
+`receipts/ObfuscationKernel@1249613/feat/irq-wait-time/` and
+`receipts/ObfuscationOS@27ec4c0/feat/irq-wait-time/`. All five P1 worktrees are
+merged; the BusyBox gate suite's 8 reviewed failures stay open.
 
 ## P2: platform and protocols
 

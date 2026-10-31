@@ -9,8 +9,9 @@ ObfuscationOS `docs/plans/README.md`; nothing here closes a gate.
 ## Rules
 
 - Paired worktrees under `wt/`: `python3 scripts/wt_pair.py --topic NAME` creates
-  `wt/kernel-NAME` and `wt/os-NAME`; the OS side consumes the kernel side's SDK
-  export. A worktree lives at most 4–6 weeks.
+  `wt/kernel-NAME` and `wt/os-NAME` (`--os-topic`/`--os-kind` when the OS
+  branch differs, as in every P2 pair); the OS side consumes the kernel side's
+  SDK export. A worktree lives at most 4–6 weeks.
 - Fast lane everywhere: x86_64, arm32 (32-bit), ppc (big-endian). Full ten
   profiles before merging architecture-sensitive work.
 - Evidence goes to ObfuscationEvidence, never into a product tree.

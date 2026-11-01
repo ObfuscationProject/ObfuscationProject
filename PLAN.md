@@ -117,6 +117,20 @@ review fixed the defects it found before the merge. Receipts: ObfuscationEvidenc
 `receipts/ObfuscationOS@27ec4c0/feat/irq-wait-time/`. All five P1 worktrees are
 merged; the BusyBox gate suite's 8 reviewed failures stay open.
 
+Merged 2026-11-01: Kernel `feat/net-core` (PR #15, WT2.3, module ABI 79) with
+OS `feat/net-services` (OS PR #11, the kernel pairing); tag
+`sdk-abi79-uapi0.16` in both. The kernel answers ARP, neighbour discovery and
+echo over IPv4 and IPv6, autoconfigures IPv6, routes and resolves egress, runs
+a NewReno sliding-window TCP with reassembly, offers `AF_INET6` datagram and
+stream sockets, and wakes TCP and UDP waiters through per-socket wait queues.
+Exit evidence: on ten profiles the OS `net_probe` image passes the kernel link
+probe under QEMU against a scripted external peer (gateway ARP, IPv4/IPv6
+ping, SLAAC, 8 KiB TCP echo), also with 10 % TCP loss; the pinned QEMU has no
+user-mode networking (kernel `docs/qualification/NET_CORE.md`, OS
+`docs/qualification/NET_PROBE.md`). Receipts: ObfuscationEvidence
+`receipts/ObfuscationKernel@956c7be/feat/net-core/`. OS WT2.3 services (netd,
+DHCP, DNS, sntp, `ip`, the HTTP exit gate) stay open.
+
 ## P2: platform and protocols
 
 | Worktree | Component | Size | Depends on |

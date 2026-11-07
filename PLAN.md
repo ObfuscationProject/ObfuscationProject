@@ -131,6 +131,24 @@ user-mode networking (kernel `docs/qualification/NET_CORE.md`, OS
 `receipts/ObfuscationKernel@956c7be/feat/net-core/`. OS WT2.3 services (netd,
 DHCP, DNS, sntp, `ip`, the HTTP exit gate) stay open.
 
+Merged 2026-11-07: Kernel `feat/smp-bringup` (PR #16, WT2.1, module ABI 80) with
+OS `feat/smp-bringup` (OS PR #12, the kernel pairing); tag `sdk-abi80-uapi0.16`
+in both. x86_64 (INIT-SIPI), aarch64 (PSCI) and rv64 (CLINT MSIP; M-mode, so no
+SBI HSM) start their secondaries; the other seven profiles report UP. Lifted
+bring-up limits: Linux identity/clock and ext4 regular-file syscalls run as
+kernel sections without the big lock, device lines route to any CPU (GICv2,
+PLIC, x86_64 I/O APIC), futex user words are atomic, x86 APs are admitted only
+after a verified TSC handshake, user TLB entries carry per-CPU ASIDs/PCIDs,
+exec evicts siblings only after its fallible steps, and secondaries can be
+stopped and restarted. Exit evidence under QEMU 10.2 TCG: 2-4 vCPU concurrent
+file/socket/fork stress on the three profiles with section overlap, hotplug
+cycles and futex atomicity gates, and the native OS distro on all ten profiles
+(kernel `docs/qualification/SMP_BRINGUP.md`, OS
+`docs/qualification/SMP_STRESS.md`). Receipts: ObfuscationEvidence
+`receipts/ObfuscationKernel@bf3c63c/feat/smp-bringup/` and
+`receipts/ObfuscationKernel@f69c5c5/feat/smp-bringup/`. Other kernel work stays
+under the big lock; x86 PCIDs and `IA32_TSC_ADJUST` are unexercised under TCG.
+
 ## P2: platform and protocols
 
 | Worktree | Component | Size | Depends on |

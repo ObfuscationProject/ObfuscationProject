@@ -149,6 +149,26 @@ cycles and futex atomicity gates, and the native OS distro on all ten profiles
 `receipts/ObfuscationKernel@f69c5c5/feat/smp-bringup/`. Other kernel work stays
 under the big lock; x86 PCIDs and `IA32_TSC_ADJUST` are unexercised under TCG.
 
+Merged 2026-11-16: Kernel `feat/tty-jobctl` (PR #17, WT2.2, module ABI 81, UAPI
+0.17.0); tag `sdk-abi81-uapi0.17` on the kernel merge. The kernel gains termios,
+N_TTY, job control, controlling terminals and devpts (kernel
+`docs/modules/tty.md`). Receipts: ObfuscationEvidence
+`receipts/ObfuscationKernel@86423f5/feat/tty-jobctl/` and `@d07b8a3`. Its OS
+consumer change set landed on OS main through `feat/net-socket-gaps` (below);
+OS `feat/getty-login` (getty and login on a PTY) stays open.
+
+Merged 2026-11-26: Kernel `feat/net-socket-gaps` (PR #18, WT2.3 follow-up,
+module ABI 82) with OS `feat/net-socket-gaps` (OS PR #13, which also carries the
+ABI 81 consumer); tag `sdk-abi82-uapi0.17` in both. ICMP errors reach TCP
+connections and connected UDP sockets, socket errors are reported once
+(including `SO_ERROR`/`SO_TYPE`), poll/select work over TCP streams (ENOSYS
+before) and polls over sockets sleep on their wait queues, and TCP
+getsockname/getpeername are implemented. Exit evidence on ten profiles: kernel
+`xmake test`, the OS `net_probe` link probe clean and with 10 % TCP loss, and
+`qemu-distro --require-native` userland acceptance (kernel
+`docs/qualification/NET_CORE.md`). Receipts: ObfuscationEvidence
+`receipts/ObfuscationKernel@43ba0bb/feat/net-socket-gaps/`.
+
 ## P2: platform and protocols
 
 | Worktree | Component | Size | Depends on |

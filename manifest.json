@@ -2,20 +2,20 @@
   "schema": 1,
   "description": "Component pins validated together. Regenerate with scripts/sync.py --pin.",
   "sdk": {
-    "module_abi": 80,
-    "uapi": "0.16.0",
+    "module_abi": 82,
+    "uapi": "0.17.0",
     "manifest_schema": 1
   },
   "components": {
     "ObfuscationKernel": {
       "url": "https://github.com/ObfuscationProject/ObfuscationKernel.git",
       "branch": "main",
-      "commit": "931f252d437ebb765871b5d4f0a7c8dc5c834c7a"
+      "commit": "fd8abeecff0296d7cad8481f1d9c6ba867ebfa3e"
     },
     "ObfuscationOS": {
       "url": "https://github.com/ObfuscationProject/ObfuscationOS.git",
       "branch": "main",
-      "commit": "c3e1c5559a1a30c43cb4938e53e7090458234b0a"
+      "commit": "c1a8d71295f332d2cae314b1145c9e6593ed29ac"
     },
     "SysToolchain": {
       "url": "https://github.com/ObfuscationProject/SysToolchain.git",
@@ -30,7 +30,7 @@
     "ObfuscationEvidence": {
       "url": "https://github.com/ObfuscationProject/ObfuscationEvidence.git",
       "branch": "main",
-      "commit": "9b13d2b265f6215f33d59f3af8e940936c8beede"
+      "commit": "d79c82dae13f61a4e166e99d45db5266be468f6c"
     }
   }
 }

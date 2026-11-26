@@ -169,6 +169,15 @@ getsockname/getpeername are implemented. Exit evidence on ten profiles: kernel
 `docs/qualification/NET_CORE.md`). Receipts: ObfuscationEvidence
 `receipts/ObfuscationKernel@43ba0bb/feat/net-socket-gaps/`.
 
+Merged 2026-11-26: Kernel `feat/net-socketcall` (PR #20, no ABI change) with OS
+`feat/net-socketcall` (OS PR #15); tag `p2-net-socketcall` in both. TCP works
+through legacy socketcall on i386, MIPS O32 and PowerPC (every selector, plus
+getsockopt on UDP), sendto/recvfrom work on TCP streams, and connect binds an
+unbound stream (ephemeral port). Exit evidence: the OS `net-socketcall` guest
+fixture passes on i386, mips and ppc; ten-profile kernel `xmake test`,
+`net_probe` (clean and 10 % loss) and `qemu-distro --require-native` stay green
+(kernel `docs/qualification/NET_CORE.md`).
+
 ## P2: platform and protocols
 
 | Worktree | Component | Size | Depends on |

@@ -10,12 +10,12 @@
     "ObfuscationKernel": {
       "url": "https://github.com/ObfuscationProject/ObfuscationKernel.git",
       "branch": "main",
-      "commit": "fd8abeecff0296d7cad8481f1d9c6ba867ebfa3e"
+      "commit": "a564ae621aa02526e014e11725a82a909eed4fe9"
     },
     "ObfuscationOS": {
       "url": "https://github.com/ObfuscationProject/ObfuscationOS.git",
       "branch": "main",
-      "commit": "c1a8d71295f332d2cae314b1145c9e6593ed29ac"
+      "commit": "26229b4f26665b2c93daca7198b8319241f798ae"
     },
     "SysToolchain": {
       "url": "https://github.com/ObfuscationProject/SysToolchain.git",

@@ -155,7 +155,7 @@ N_TTY, job control, controlling terminals and devpts (kernel
 `docs/modules/tty.md`). Receipts: ObfuscationEvidence
 `receipts/ObfuscationKernel@86423f5/feat/tty-jobctl/` and `@d07b8a3`. Its OS
 consumer change set landed on OS main through `feat/net-socket-gaps` (below);
-OS `feat/getty-login` (getty and login on a PTY) stays open.
+OS `feat/getty-login` followed (below).
 
 Merged 2026-11-26: Kernel `feat/net-socket-gaps` (PR #18, WT2.3 follow-up,
 module ABI 82) with OS `feat/net-socket-gaps` (OS PR #13, which also carries the
@@ -177,6 +177,19 @@ unbound stream (ephemeral port). Exit evidence: the OS `net-socketcall` guest
 fixture passes on i386, mips and ppc; ten-profile kernel `xmake test`,
 `net_probe` (clean and 10 % loss) and `qemu-distro --require-native` stay green
 (kernel `docs/qualification/NET_CORE.md`).
+
+Merged 2026-11-26: OS `feat/getty-login` (OS PR #14, WT2.2, no ABI change; tag
+`p2-getty-login`) with the kernel fix `fix/jobctl-native-stop` (PR #19, no ABI
+change): a native SIGSTOP to a process in an orphaned process group was dropped
+on mips/mips64. `/bin/getty` runs `login` and the shell on `/dev/pts/N`, `oksh`
+has job control (`&`, `jobs`, `fg`, `bg`), and console login is the journalled
+product image's default (other images keep the maintenance shell). Exit evidence
+on ten profiles: the getty/login lane (two boots, job control on the pts,
+hangup on logout, relogin), the 20-case guest TTY/session/job-control probe
+(also in OS CI on x86_64, arm32 and ppc), oksh job control and
+`qemu-distro --require-native` (OS `docs/qualification/GETTY_LOGIN.md`).
+Receipts: ObfuscationEvidence `receipts/ObfuscationOS@b0fc7d1/feat/getty-login/`
+and `receipts/ObfuscationKernel@72eb905/fix/jobctl-native-stop/`.
 
 ## P2: platform and protocols
 
